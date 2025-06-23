@@ -5,6 +5,7 @@ from flask_jwt_extended import JWTManager
 from server.config import Config
 from server.controllers.guest_controller import GuestController
 from server.extensions import db
+from server.controllers.episode_controller import EpisodeController
 
 
 migrate=Migrate()
@@ -24,6 +25,11 @@ def create_app():
     guest_view = GuestController.as_view('guest_api')
     app.add_url_rule('/guests/', defaults={'id': None}, view_func=guest_view, methods=['GET', 'POST'])
     app.add_url_rule('/guests/<int:id>', view_func=guest_view, methods=['GET', 'DELETE'])
+
+    episode_view = EpisodeController.as_view('episode_api')
+    app.add_url_rule('/episodes/', defaults={'id': None}, view_func=episode_view, methods=['GET', 'POST'])
+    app.add_url_rule('/episodes/<int:id>', view_func=episode_view, methods=['GET', 'DELETE'])
+
 
 
     return app
