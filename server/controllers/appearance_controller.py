@@ -2,8 +2,10 @@ from flask import  request, jsonify
 from flask.views import MethodView
 from server.extensions import db
 from server.models.appearance import Appearance
+from flask_jwt_extended import jwt_required
 
 class AppearanceController(MethodView):
+    @jwt_required()
     def post(self):
         data = request.get_json()
         try:
