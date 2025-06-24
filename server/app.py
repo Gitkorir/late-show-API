@@ -6,6 +6,7 @@ from server.config import Config
 from server.controllers.guest_controller import GuestController
 from server.extensions import db
 from server.controllers.episode_controller import EpisodeController
+from server.controllers.appearance_controller import AppearanceController
 
 
 migrate=Migrate()
@@ -29,6 +30,10 @@ def create_app():
     episode_view = EpisodeController.as_view('episode_api')
     app.add_url_rule('/episodes/', defaults={'id': None}, view_func=episode_view, methods=['GET', 'POST'])
     app.add_url_rule('/episodes/<int:id>', view_func=episode_view, methods=['GET', 'DELETE'])
+
+    appearance_view = AppearanceController.as_view('appearance_api')
+    app.add_url_rule('/appearances/', view_func=appearance_view, methods=['POST'])
+
 
 
 
