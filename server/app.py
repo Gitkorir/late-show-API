@@ -7,7 +7,7 @@ from server.controllers.guest_controller import GuestController
 from server.extensions import db
 from server.controllers.episode_controller import EpisodeController
 from server.controllers.appearance_controller import AppearanceController
-
+from server.models.user import User
 
 migrate=Migrate()
 jwt=JWTManager()
