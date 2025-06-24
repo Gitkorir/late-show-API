@@ -2,10 +2,13 @@ from flask import request, jsonify
 from server.extensions import db
 from flask.views import MethodView
 from werkzeug.exceptions import NotFound
+from flask_jwt_extended import jwt_required
 
 class BaseController(MethodView):
 
     model = None  # To be set in child class
+
+    @jwt_required()
 
     def get(self, id=None):
         if id is None:
@@ -25,7 +28,7 @@ class BaseController(MethodView):
         db.session.commit()
         return '', 204  # No content
 
-    def post(self):
+    def post(self, id=None):
         try:
             data = request.get_json()
             instance = self.model(**data)
